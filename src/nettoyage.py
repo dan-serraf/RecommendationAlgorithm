@@ -1,5 +1,25 @@
 import os
 
+import unicodedata
+import string
+ 
+
+print()
+s = "string. With. Pun__ctuation?"
+
+
+print(s)
+
+def supprimeAccent(string):
+    return unicodedata.normalize('NFKD', string).encode('ASCII', 'ignore').decode("utf-8")
+
+def minusculeString(string):
+    return string.lower()
+
+def supprimePonctuation(string):
+    for ponctuation in string.punctuation:
+        string = string.replace(ponctuation, "")
+    return string
 
 def extractionDonner(chemin_racine) :
     """
@@ -39,6 +59,9 @@ def normaliseDonner(string):
     param : string -> chaine de caractere a normaliser
     return : string -> chaine de caractere normaliser.
     """
+    string = minusculeString(string) #mettre tous les mots en minuscules
+    string = supprimePonctuation(string) #remplace accent 
+    string = supprimePonctuation(string) #supprime la ponctuation
     return string
 
 def filtreDonner(liste) :
